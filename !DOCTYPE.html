@@ -2,30 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Architecture Blog - Home</title>
     <style>
         :root {
-            --primary-color: #4b3f2f; /* dark forest */
-            --accent-color: #d2691e; /* terracotta */
+            --primary-color: #4b3f2f;
+            --accent-color: #d2691e;
             --background-color: #1e1e1e;
             --text-color: #f5f5f5;
             --card-bg: #2a2a2a;
             --info-box-bg: #333;
         }
-        body {
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
             margin: 0;
+            padding: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
             background: var(--background-color);
             color: var(--text-color);
             scroll-behavior: smooth;
-            overflow-y: scroll;
         }
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--accent-color); /* terracotta */
+            background: var(--accent-color);
             padding: 10px 20px;
             gap: 15px;
             flex-wrap: wrap;
@@ -57,7 +61,7 @@
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            background: url('/images/profile-icon.jpg') center/cover no-repeat;
+            background: url('./images/profile-icon.jpg') center/cover no-repeat;
             cursor: pointer;
             border: 1.5px solid white;
         }
@@ -85,7 +89,7 @@
             color: white;
             padding: 40px 20px;
             text-align: center;
-            background-image: url('/images/hero.jpg');
+            background-image: url('./images/hero.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -119,7 +123,8 @@
             cursor: pointer;
         }
         .feed {
-            max-width: 1000px;
+            width: 100%;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
             display: grid;
@@ -169,8 +174,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
     <nav>
         <div class="logo">ArchBlog</div>
         <div class="nav-links">
@@ -184,14 +187,10 @@
         </div>
         <div class="profile" title="Profile / Register"></div>
     </nav>
-
-    <!-- Hero Section -->
     <header>
         <h1>Architecture Insights</h1>
         <p>Explore the art and science of building design</p>
     </header>
-
-    <!-- Category Bar -->
     <div class="category-bar">
         <button>Blogs</button>
         <button>News</button>
@@ -200,75 +199,67 @@
         <button>Material</button>
         <button>Shopping</button>
     </div>
-
-    <!-- Search Bar -->
     <div class="search-bar">
         <input type="text" id="searchInput" placeholder="Search topics..." />
         <button onclick="filterPosts()">Search</button>
     </div>
-
-    <!-- Google Ad Slot -->
     <div class="ad-slot">
         <div class="google-ad-placeholder">Google Ad Slot Here</div>
     </div>
-
-    <!-- Blog Feed -->
     <div class="feed" id="blogFeed">
         <div class="post" data-keywords="modern architecture design">
-            <img src="/images/post1.jpg" alt="Post 1" />
+            <img src="./images/post1.jpg" alt="Post 1" />
             <div class="post-content">
                 <h3>Modern Architecture Trends</h3>
                 <p>Discover the latest trends shaping the skylines.</p>
             </div>
         </div>
         <div class="post" data-keywords="sustainable green buildings">
-            <img src="/images/post2.jpg" alt="Post 2" />
+            <img src="./images/post2.jpg" alt="Post 2" />
             <div class="post-content">
                 <h3>Sustainable Building Practices</h3>
                 <p>Learn about eco-friendly design principles.</p>
             </div>
         </div>
         <div class="post" data-keywords="urban planning city">
-            <img src="/images/post3.jpg" alt="Post 3" />
+            <img src="./images/post3.jpg" alt="Post 3" />
             <div class="post-content">
                 <h3>Urban Planning Explained</h3>
                 <p>A look into city layouts and efficient spaces.</p>
             </div>
         </div>
         <div class="post" data-keywords="historic restoration renovation">
-            <img src="/images/post4.jpg" alt="Post 4" />
+            <img src="./images/post4.jpg" alt="Post 4" />
             <div class="post-content">
                 <h3>Historic Restoration Projects</h3>
                 <p>Reviving old structures with modern techniques.</p>
             </div>
         </div>
     </div>
-
-    <!-- Self-Ad Slot -->
     <div class="ad-slot">
         <div class="self-ad-placeholder">Your Custom Ad Here</div>
     </div>
-
-    <!-- Information Box -->
     <div class="info-box">
         <h2>More Information</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Update this text with detailed site info.</p>
-        <img src="/images/info-box.jpg" alt="Info Box Image" style="width:100%; margin-top:10px;" />
+        <img src="./images/info-box.jpg" alt="Info Box Image" style="width:100%; margin-top:10px;" />
     </div>
-
-    <!-- Footer -->
     <footer>
         &copy; 2025 Architecture Insights. All rights reserved.
     </footer>
-
     <script>
         function filterPosts() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-            console.log('Search input:', input);
             const posts = document.querySelectorAll('.post');
-            console.log('Number of posts found:', posts.length);
-
             posts.forEach(post => {
                 const keywords = post.getAttribute('data-keywords');
-                console.log('Checking post keywords:', keywords);
-                if (
+                if (keywords.includes(input)) {
+                    post.style.display = '';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
